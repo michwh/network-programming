@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <span>index.html</span><br>
+  <button class="head">执行HEAD请求</button>
+  <span class="content"></span>
+  <script>
+    const head = document.querySelector('.head')
+    head.addEventListener('click', () => {
+      let request = new XMLHttpRequest()
+      request.open('HEAD', '/getHead', true)
+      request.onreadystatechange = () => {
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+          let content = document.querySelector('.content')
+          content.innerHTML = `<div>响应头如下：</div><br>${request.getAllResponseHeaders()}`
+        }
+      }
+      request.send()
+    })
+  </script>
+</body>
+</html>
