@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <span>登录界面</span><br>
+  <input type="text" class="input">
+  <button class="login">登录</button>
+  <script>
+    const submit = document.querySelector('.login')
+    submit.addEventListener("click", () => {
+      let input = {
+        name: document.querySelector('.input').value
+      }
+      let request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
+      request.open('POST', '/login', true)
+      request.setRequestHeader('content-type', 'application/json')
+      request.onreadystatechange = (e) => {
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+          console.log('登录成功')
+          window.location.href='/index';
+        }
+      }
+      request.send(JSON.stringify(input))
+    })
+  </script>
+</body>
+</html>
